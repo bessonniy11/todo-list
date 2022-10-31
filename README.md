@@ -1,6 +1,17 @@
 # TodoList
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
+Техническое задание: 
+Реализовать todo list . Использовать angular framework и typescript
+Должно быть четыре статуса : new (новый) , in progress ( в процессе) , done ( выполнено) , canceled ( отменено )
+Логика передвижения между статусами:
+Из New можно перевести только в in progress и canceled 
+Из in progress - в done , cancelled 
+Из done - перевести никуда нельзя 
+Из cancelled - в new
+
+
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0. - Почему так вышло, что проект был изначально сгенерирован на ангуляр древней 12.2.0 - внезапно умерла материнка в середине недели, пришлось достать из под дивана старый ноут 7 винде и немного (если честно, то скорее много..) поиграться с версиями, чтобы проекты запускались. 
 
 ## Development server
 
