@@ -12,9 +12,13 @@ export class TodoComponent implements OnInit {
 
   todoForm !: FormGroup;
   news: ITask[] = [];
-  inprogress: ITask[] = [];
+  inProgress: ITask[] = [];
   done: ITask[] = [];
   cancelled: ITask[] = [];
+  updateIndex!: any;
+  isEditEnabled: boolean = false;
+
+
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -27,16 +31,17 @@ export class TodoComponent implements OnInit {
     this.news.push({
       description: this.todoForm.value.item,
       done: false
-    })
+    });
+    this.todoForm.reset();
   }
 
-  deleteTask(i: number, colum: string) {
-    switch (colum) {
+  deleteTask(i: number, column: string) {
+    switch (column) {
       case 'news':
         this.news.splice(i, 1);
         break;
-      case 'inprogress':
-        this.inprogress.splice(i, 1);
+      case 'inProgress':
+        this.inProgress.splice(i, 1);
         break;
       case 'done':
         this.done.splice(i, 1);
@@ -45,31 +50,34 @@ export class TodoComponent implements OnInit {
         this.cancelled.splice(i, 1);
         break;
     }
-
+    this.todoForm.reset();
+    this.updateIndex = null;
+    this.isEditEnabled = false;
   }
 
-  editTask(i: number, tasks: string) {
+  onEdit(item:ITask, i: number) {
+    this.todoForm.controls['item'].setValue(item.description);
+    this.updateIndex = i;
+    this.isEditEnabled = true;
+  }
 
+  updateTask() {
+    this.news[this.updateIndex].description = this.todoForm.value.item;
+    this.todoForm.reset();
+    this.updateIndex = null;
+    this.isEditEnabled = false;
   }
 
   drop(event: CdkDragDrop<ITask[]>) {
-    console.log('event after', event);
     if (event.previousContainer === event.container) {
-      console.log('event.container', event.container);
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log('event.previousIndex', event.previousIndex)
-      console.log('event.currentIndex', event.currentIndex)
     } else {
-      console.log('else')
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex,
       );
-      console.log('event before', event);
-      console.log('event.previousContainer.data', event.previousContainer.data);
     }
   }
-
 }
