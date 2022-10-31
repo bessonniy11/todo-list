@@ -3,10 +3,15 @@
 Техническое задание: 
 Реализовать todo list . Использовать angular framework и typescript
 Должно быть четыре статуса : new (новый) , in progress ( в процессе) , done ( выполнено) , canceled ( отменено )
+
 Логика передвижения между статусами:
+
 Из New можно перевести только в in progress и canceled 
+
 Из in progress - в done , cancelled 
+
 Из done - перевести никуда нельзя 
+
 Из cancelled - в new
 
 
